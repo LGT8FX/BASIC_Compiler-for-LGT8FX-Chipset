@@ -1,4 +1,4 @@
-'''A demonstration program for LGT BASIC IDE
+'''A demonstration program for GCB
 '''---------------------------------------------------------------------------------
 '''This program uses the SoftSerial library for serial sending.
 ''' SoftSerial uses ASM routines for minimal overhead.

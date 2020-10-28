@@ -1,4 +1,4 @@
-'''A most simple sample for GCGB and LGT.
+'''A most simple sample for GCGB and GCB.
 '''------------------------------------------------------------------------
 '''  This program shows the basics of Voltage reference
 '''
@@ -24,12 +24,12 @@
 
     dim adc_value as word
 
-    dir portb.5 out
+    dir portd.4 out
 
     // main code here, to run repeatedly:
     do
         // toggle LED
-        portb.5 = !portb.5
+        portd.4 = !portd.4
 
         // read ADC channel 6
         adc_value = readad12( ADC6 )

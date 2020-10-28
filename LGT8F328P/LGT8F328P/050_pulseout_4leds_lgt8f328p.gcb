@@ -1,9 +1,9 @@
-'''A demonstration program for LGT BASIC IDE
+'''A demonstration program for GCB
 '''---------------------------------------------------------------------------------
 ''' This demonstration simply turns the LED on and off with a wait of 500 ms.
 '''
 '''
-''' LGT BASIC will send a pulse to each LED sequentially.
+''' Great Cow BASIC will send a pulse to each LED sequentially.
 ''' In this demo we connect four LEDs and flash them.
 ''' Connect the LEDs via suitable resistors using a standard LED connection.
 '''
@@ -25,7 +25,7 @@
 ; ----- Configuration
 #chip  LGT8F328P
 #option Explicit
-'LGT BASIC simplifies the configuration by setting the frequency and the configuration for you.
+'Great Cow BASIC simplifies the configuration by setting the frequency and the configuration for you.
 
     'This option ensures that all variables are dimensioned in the user program.  See http://gcbasic.sourceforge.net/help/__option_explicit.html
     #OPTION Explicit

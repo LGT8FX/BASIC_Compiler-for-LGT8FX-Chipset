@@ -1,4 +1,4 @@
-'''A demonstration program for LGT BASIC IDE
+'''A demonstration program for GCB
 '''---------------------------------------------------------------------------------
 '''  This demonstration shows the read of the ADC as a volt meter!!
 '''
@@ -28,7 +28,7 @@
 ; ----- Configuration
 #chip  LGT8F328P
 #option Explicit
-'LGT BASIC simplifies the configuration by setting the frequency and the configuration for you.
+'Great Cow BASIC simplifies the configuration by setting the frequency and the configuration for you.
     ; ----- Define GLCD Hardware settings
     #define GLCD_TYPE GLCD_TYPE_SSD1306
     #define GLCD_I2C_Address 0x78

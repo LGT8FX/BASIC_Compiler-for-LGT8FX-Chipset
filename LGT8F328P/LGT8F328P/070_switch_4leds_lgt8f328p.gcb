@@ -1,9 +1,9 @@
-'''A demonstration program for LGT BASIC IDE
+'''A demonstration program for GCB
 '''---------------------------------------------------------------------------------
 ''' This demonstration simply turns the LED on and off with a wait of 500 ms.
 '''
 '''
-''' LGT BASIC will set the state of the LEDS dependent on the state of an input switch
+''' Great Cow BASIC will set the state of the LEDS dependent on the state of an input switch
 '''
 '''
 ''' In this demo we connect four LEDs and a switch.
@@ -40,7 +40,7 @@
 ; ----- Configuration
 #chip  LGT8F328P
 #option Explicit
-'LGT BASIC simplifies the configuration by setting the frequency and the configuration for you.
+'Great Cow BASIC simplifies the configuration by setting the frequency and the configuration for you.
 
     'This option ensures that all variables are dimensioned in the user program.  See http://gcbasic.sourceforge.net/help/__option_explicit.html
     #OPTION Explicit
@@ -82,3 +82,4 @@
           wait LEDDELAY us
 
     Loop
+

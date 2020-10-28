@@ -1,4 +1,4 @@
-'''A demonstration program for LGT BASIC IDE
+'''A demonstration program for GCB
 '''---------------------------------------------------------------------------------
 '''  This demonstration shows the impact of the time delay to manage the debouncing of a switch.
 '''  The ADC value creates a delay and LEDs switch between each other when the switch is depressed.
@@ -30,7 +30,7 @@
 ; ----- Configuration
 #chip  LGT8F328P
 #option Explicit
-'LGT BASIC simplifies the configuration by setting the frequency and the configuration for you.
+'Great Cow BASIC simplifies the configuration by setting the frequency and the configuration for you.
 
     'This option ensures that all variables are dimensioned in the user program.  See http://gcbasic.sourceforge.net/help/__option_explicit.html
     #OPTION Explicit

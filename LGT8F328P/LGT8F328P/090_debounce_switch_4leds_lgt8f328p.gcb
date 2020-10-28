@@ -1,4 +1,4 @@
-'''A demonstration program for LGT BASIC IDE
+'''A demonstration program for GCB
 '''---------------------------------------------------------------------------------
 ''' This demonstration uses a simple software routine to avoid the initial noise on the switch
 ''' pin. The code will inspect the switch status, but should overcome most of the noise from a switch.
@@ -41,7 +41,7 @@
 ; ----- Configuration
 #chip  LGT8F328P
 #option Explicit
-'LGT BASIC simplifies the configuration by setting the frequency and the configuration for you.
+'Great Cow BASIC simplifies the configuration by setting the frequency and the configuration for you.
 
     'This option ensures that all variables are dimensioned in the user program.  See http://gcbasic.sourceforge.net/help/__option_explicit.html
     #OPTION Explicit

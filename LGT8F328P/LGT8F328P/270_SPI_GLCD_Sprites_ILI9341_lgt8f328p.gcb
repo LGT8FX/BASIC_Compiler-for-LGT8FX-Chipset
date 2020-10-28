@@ -1,4 +1,4 @@
-'''A demonstration program for LGT BASIC IDE
+'''A demonstration program for GCB
 '''---------------------------------------------------------------------------------
 '''  This demonstration shows sprites on the GLCD using an SPI device.
 '''
