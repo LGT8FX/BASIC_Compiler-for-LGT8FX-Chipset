@@ -1,4 +1,4 @@
-'''A demonstration program for GCB
+'''A demonstration program for GCBASIC
 '''---------------------------------------------------------------------------------
 '''  This demonstration shows sprites on the GLCD!
 '''
@@ -30,16 +30,11 @@
 ; ----- Configuration
 #chip  LGT8F328P
 #option Explicit
-'Great Cow BASIC simplifies the configuration by setting the frequency and the configuration for you.
+'GCBASIC simplifies the configuration by setting the frequency and the configuration for you.
     ; ----- Define GLCD Hardware settings
     #include <glcd.h>
     #define GLCD_TYPE GLCD_TYPE_SSD1306
     #define GLCD_I2C_Address 0x78
-
-
-    'This option ensures that all variables are dimensioned in the user program.  See http://gcbasic.sourceforge.net/help/__option_explicit.html
-    #OPTION Explicit
-
 
    'Set constants to refer to the LEDs.
     #DEFINE LED1 portc.0
@@ -47,11 +42,15 @@
     #DEFINE LED3 portc.2
     #DEFINE LED4 portc.3
 
+    #DEFINE LED5 portb.5
+
     'Set LED as an output
     Dir LED1 Out
     Dir LED2 Out
     Dir LED3 Out
     Dir LED4 Out
+
+    DIR LED5 Out
 
     #DEFINE SWITCH porte.3
     Dir SWITCH in
@@ -87,11 +86,7 @@
     dir PortD.3 Out   'OC2B   on D3
     dir PortB.2 Out   'OC1B   on D10
     dir PortB.1 out   'OC1A   on D9
-    dir PortD.5 Out   'OC0B   on D5
-
-
-
-  ; ----- Main body of program commences here.
+    dir PortD.5 Out   'OC0B   on D5  ; ----- Main body of program commences here.
 
 ; ----- Define variables
 
@@ -104,12 +99,14 @@
 
 '*******************************************************************************************
     'Draw initial screen
+
     Box 0,0,127,63
-    GLCDPrint ( 1, 36, "Great Cow BASIC")
-    GLCDPrint ( 1, 46, "GLCD Library 2020")
+    GLCDPrint ( 1, 36, "GCBASIC")
+    GLCDPrint ( 1, 46, "GLCD Library 2023")
     GLCDPrint ( 1, 54, "Sprite Support")
     wait 1 s
     GLCDCLS
+
     Box 0,0,127,63
 
 
@@ -206,15 +203,11 @@
       GLCDDrawSprite_SSD1306 oldx,oldy, spritechoice
       GLCDDrawSprite_SSD1306 curx,cury, spritechoice
       'pulse output for scope
-      'ADD IF YOU WANT TO SEE SOME ACTION
-'      'user delay
-'      wait spritedelay  'so you can see it!
+      LED5 = !LED5
 
     loop
 
-
-
-  end
+    end
 
 
 Sub GLCDDrawSprite_SSD1306(In GLCDX as byte, In GLCDY as byte, In CharCode )
@@ -463,6 +456,7 @@ end Macro
 
 Sub KeyDowbInterruptHandler
 
+    wait while  SWITCH = 0
     goto BASPROGRAMSTART
 
 End Sub

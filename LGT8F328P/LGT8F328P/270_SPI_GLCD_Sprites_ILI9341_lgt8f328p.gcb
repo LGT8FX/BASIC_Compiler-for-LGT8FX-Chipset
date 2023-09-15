@@ -1,29 +1,64 @@
-'''A demonstration program for GCB
+'''A demonstration program for GCBASIC
 '''---------------------------------------------------------------------------------
-'''  This demonstration shows sprites on the GLCD using an SPI device.
+'''  This demonstration shows sprites on the GLCD using an SPI device can use hardware or software SPI.
 '''
 '''
 '''
+
+
+
+
+
     #chip LGT8F328P
     #option explicit
     #include <glcd.h>
     #include <LGT8F328P.h>
 
     #define GLCD_TYPE GLCD_TYPE_ILI9341
+
+    'Comment out ILI9341_HardwareSPI to use software SPI
     #define ILI9341_HardwareSPI
     #define HWSPIMode MASTERULTRAFAST
 
 
     'Pin mappings for SPI - this GLCD driver supports Hardware SPI and Software SPI
     #define GLCD_DC       DIGITAL_8           ' Data command line
-    #define GLCD_CS       DIGITAL_10          ' Chip select line
     #define GLCD_RESET    DIGITAL_9           ' Reset line
-    #define GLCD_DI       DIGITAL_12          ' Data in | MISO    - Not used therefore not really required
+    #define GLCD_CS       DIGITAL_10          ' Chip select line
     #define GLCD_DO       DIGITAL_11          ' Data out | MOSI
+    #define GLCD_DI       DIGITAL_12          ' Data in  | MISO    - Not used therefore not really required
     #define GLCD_SCK      DIGITAL_13          ' Clock Line
 
+
+
+'    GLCDfntDefaultSize   = 2
+'    GLCDfntDefaultHeight = 8
+'
+'    GLCDPrintStringLn "Hello "
+'    GLCDPrintStringLn "SPI connectivity"
+'
+'
+'    End
+'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     ;define the frame_refresh
-    #define frame_refresh 5  '1 to 5 is advised
+    #define frame_refresh 1  '1 to 5 is advised
     ;
     ;now rename colours to make it easier to set up sprite data
     #define bk ILI9341_BLACK
@@ -46,6 +81,9 @@
     #define fu ILI9341_FUCHSIA
     ;backgroung color
     #define bg te
+    #define bg_hi  bg / 256
+    #define bg_lo  bg AND 255
+
 
     GLCDRotate Portrait_Rev
     GLCDCLS bg
@@ -56,7 +94,7 @@
     dim ptr,spritedata_ptr,pixel as word
     ;
     ;demo vars
-    dim temp,frame,frame_count as byte
+    dim temp,frame,frame_count as word
     dim dx(8),dy(8) as word
     dim spy(8),oldspy(8) as word
     dim spx(8),oldspx(8) as word
@@ -104,6 +142,7 @@
       ;
       next temp
       frame_count++ ;when to change spritedata_ptr
+
       if frame_count=frame_refresh then
         frame=!frame
         frame_count=0
@@ -112,19 +151,52 @@
     loop ;end demo
     ;
 
+dim spiinx as byte
     sub sprite ( in sprite_x, in sprite_y, in spritedata_ptr ) ;fills box with sprite data
       SetAddressWindow_ILI9341 ( sprite_x,sprite_y,sprite_x +15,sprite_y +15 )
-      for ptr=spritedata_ptr to spritedata_ptr+255
-        ReadTable spritedata,ptr,pixel
-        SendWord_ILI9341 pixel
-      next ptr
+
+      #IFDEF ILI9341_HardwareSPI
+          set ILI9341_CS OFF
+          set ILI9341_DC ON
+
+          for ptr=spritedata_ptr to spritedata_ptr+255
+            ReadTable spritedata,ptr,pixel
+            FastHWSPITransfer pixel_h
+            FastHWSPITransfer pixel
+          next ptr
+          set ILI9341_CS ON
+      #ENDIF
+
+      #IFNDEF ILI9341_HardwareSPI
+          for ptr=spritedata_ptr to spritedata_ptr+255
+            ReadTable spritedata,ptr,pixel
+            SendWord_ILI9341 pixel
+          next ptr
+      #ENDIF
+
     end sub
     ;
     sub erase_sprite (sprite_x,sprite_y) ;write a box of 0's
       SetAddressWindow_ILI9341 ( sprite_x,sprite_y,sprite_x +15,sprite_y +15 )
-      repeat 256
-        SendWord_ILI9341 bg
-      end repeat
+
+      #IFDEF ILI9341_HardwareSPI
+          set ILI9341_CS OFF
+          set ILI9341_DC ON
+
+          repeat 128
+            repeat 2
+                FastHWSPITransfer bg_hi
+                FastHWSPITransfer bg_lo
+            end repeat
+          end repeat
+      #ENDIF
+
+      #IFNDEF ILI9341_HardwareSPI
+          repeat 256
+            SendWord_ILI9341 bg
+          end repeat
+      #ENDIF
+
     end sub
     ;
     table spritedata ;sprite 1

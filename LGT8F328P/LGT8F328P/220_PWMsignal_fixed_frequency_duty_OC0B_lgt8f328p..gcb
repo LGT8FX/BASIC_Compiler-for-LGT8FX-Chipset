@@ -5,7 +5,7 @@
 '''
 ''' This uses two constants to fix the PWM parameters. in this demonstration they are set to 38khz @ 50% duty
 ''' The Fixed Mode PWM method can ONLY uses OC0B port/PortD.5
-''' We have to use PWM Channel 2 on this microcontroller as PWM Channel 1 is not available as the Great Cow BASIC library requires to use PWM Channel 1 registers for computational purposes.
+''' We have to use PWM Channel 2 on this microcontroller as PWM Channel 1 is not available as the GCBASIC library requires to use PWM Channel 1 registers for computational purposes.
 
 '''@author  Anobium
 '''@licence GPL
@@ -14,13 +14,14 @@
 '''********************************************************************************
 
 #chip lgt8f328p
+#option Explicit
 
 
     'Set the PWM pin to output mode - this option is fixed to the OC0B PWM channel
     DIR PORTD.5 out
 
     'Main code
-    #define PWM_Freq 38      'Frequency of PWM in KHz
+    #define PWM_Freq 10     'Frequency of PWM in KHz
     #define PWM_Duty 50      'Duty cycle of PWM (%)
 
     do

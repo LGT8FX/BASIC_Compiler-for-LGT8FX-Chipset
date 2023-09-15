@@ -1,4 +1,4 @@
-'''A most simple sample for GCGB and GCB.
+'''An example program for GCGB and GCB.
 '''------------------------------------------------------------------------
 '''This program shows the name of the programmer chip passed to AVRDUDE, other key chip specific information.
 '''
@@ -27,7 +27,7 @@
     #define USART_TX_BLOCKING
     #define USART_DELAY OFF
 
-    ' ----- Main body of program commences here.
+    // ----- Main body of program commences here.
 
 
     Do Forever
